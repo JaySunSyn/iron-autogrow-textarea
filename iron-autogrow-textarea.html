@@ -149,11 +149,8 @@ to notify this element the value has changed.
       }
     },
 
-    attached: function() {
-      this.bindValue = this.value;
-    },
-
-    _bindValueChanged: function() {
+    updateTextarea:function(){
+      // this.bindValue = this.value;
       var textarea = this.textarea;
       if (!textarea) {
         return;
@@ -163,6 +160,14 @@ to notify this element the value has changed.
       this.update();
       // manually notify because we don't want to notify until after setting value
       this.fire('bind-value-changed', {value: this.bindValue});
+    },
+
+    attached: function() {
+      this.updateTextarea();
+    },
+
+    _bindValueChanged: function() {
+      this.updateTextarea();
     },
 
     _onInput: function(event) {
